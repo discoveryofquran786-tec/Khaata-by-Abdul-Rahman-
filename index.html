@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gigantic Wit | Professional Editor</title>
+    <meta name="author" content="Abdul Rahman">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="toast" class="toast hidden">
+        <i class="fas fa-check-circle"></i> <span id="toast-msg">Action Successful</span>
+    </div>
+
+    <div id="ocr-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-robot"></i> AI Text Extractor</h3>
+                <button onclick="toggleModal('ocr-modal')" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="drop-zone">
+                    <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                    <p>Click to upload or drag image here</p>
+                    <input type="file" id="ocr-file-input" accept="image/*" hidden>
+                </div>
+                <div class="progress-wrapper hidden" id="progress-wrapper">
+                    <p>Scanning Neural Network...</p>
+                    <div class="progress-bar"><div class="fill" id="ocr-bar"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <i class="fas fa-brain fa-lg"></i>
+                <div>
+                    <h1>Gigantic Wit</h1>
+                    <small>by Abdul Rahman</small>
+                </div>
+            </div>
+            
+            <nav class="nav-links">
+                <button class="nav-item active" onclick="app.newDoc()">
+                    <i class="fas fa-file-alt"></i> New Document
+                </button>
+                <button class="nav-item" onclick="toggleModal('ocr-modal')">
+                    <i class="fas fa-eye"></i> Image to Text (OCR)
+                </button>
+                <button class="nav-item" onclick="app.downloadPdf()">
+                    <i class="fas fa-file-pdf"></i> Export as PDF
+                </button>
+                <button class="nav-item warning" onclick="app.clearStorage()">
+                    <i class="fas fa-trash"></i> Reset All
+                </button>
+            </nav>
+
+            <div class="stats-panel">
+                <div class="stat-box">
+                    <span id="word-count">0</span>
+                    <label>Words</label>
+                </div>
+                <div class="stat-box">
+                    <span id="char-count">0</span>
+                    <label>Chars</label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="workspace">
+            <header class="toolbar">
+                <button class="menu-toggle mobile-only" onclick="app.toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="tool-group">
+                    <button onclick="format('bold')" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button onclick="format('italic')" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button onclick="format('underline')" title="Underline"><i class="fas fa-underline"></i></button>
+                    <button onclick="format('strikeThrough')" title="Strikethrough"><i class="fas fa-strikethrough"></i></button>
+                </div>
+
+                <div class="tool-group">
+                    <button onclick="format('justifyLeft')"><i class="fas fa-align-left"></i></button>
+                    <button onclick="format('justifyCenter')"><i class="fas fa-align-center"></i></button>
+                    <button onclick="format('justifyRight')"><i class="fas fa-align-right"></i></button>
+                </div>
+
+                <div class="tool-group">
+                    <button onclick="format('insertUnorderedList')"><i class="fas fa-list-ul"></i></button>
+                </div>
+
+                <div class="action-group">
+                    <span id="save-indicator" class="save-status">Saved</span>
+                </div>
+            </header>
+
+            <div class="editor-container">
+                <div id="editor" class="paper" contenteditable="true" spellcheck="false">
+                    <h2>Welcome to Gigantic Wit.</h2>
+                    <p>This is where your genius begins. Start typing...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+  </html>
+  
